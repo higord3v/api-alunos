@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Aluno } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CriarAlunoDTO } from './dto/CriarAlunoDTO.dto';
@@ -21,6 +21,10 @@ export class AlunoService {
     id: number,
     criarAlunoDTO: CriarAlunoDTO,
   ): Promise<Aluno> {
+    const aluno = await this.prismaService.aluno.findUnique({ where: { id } });
+
+    if (!aluno) throw new NotFoundException();
+
     return this.prismaService.aluno.update({
       where: { id },
       data: criarAlunoDTO,
@@ -28,10 +32,18 @@ export class AlunoService {
   }
 
   async recuperarUmAluno(id: number): Promise<Aluno> {
-    return this.prismaService.aluno.findUnique({ where: { id } });
+    const aluno = await this.prismaService.aluno.findUnique({ where: { id } });
+
+    if (!aluno) throw new NotFoundException();
+
+    return aluno;
   }
 
   async deletar(id: number): Promise<Aluno> {
+    const aluno = await this.prismaService.aluno.findUnique({ where: { id } });
+
+    if (!aluno) throw new NotFoundException();
+
     return this.prismaService.aluno.delete({ where: { id } });
   }
 }
