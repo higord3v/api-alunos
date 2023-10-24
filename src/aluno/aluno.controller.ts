@@ -24,13 +24,13 @@ export class AlunoController {
   }
 
   @Post()
-  @ApiBody({ type: [CriarAlunoDTO] })
+  @ApiBody({ type: CriarAlunoDTO })
   async postAluno(@Body() criarAlunoDTO: CriarAlunoDTO): Promise<Aluno> {
     return this.alunoService.criarAluno(criarAlunoDTO);
   }
 
   @Put(':id')
-  @ApiBody({ type: [AtualizarAlunoDTO] })
+  @ApiBody({ type: AtualizarAlunoDTO })
   async putAluno(
     @Param('id', ParseIntPipe) id: number,
     @Body() atualizarAluno: AtualizarAlunoDTO,

@@ -1,4 +1,11 @@
-import { IsPositive, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsPositive,
+  IsNotEmpty,
+  IsString,
+  Min,
+  Max,
+  IsNumber,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CriarAlunoDTO {
@@ -10,16 +17,22 @@ export class CriarAlunoDTO {
   @IsPositive()
   @IsNotEmpty()
   @ApiProperty()
+  @Min(6)
+  @Max(200)
   idade: number;
 
   @ApiProperty()
-  @IsPositive()
   @IsNotEmpty()
+  @IsNumber()
+  @Min(0)
+  @Max(10)
   nota_primeiro_semestre: number;
 
   @ApiProperty()
-  @IsPositive()
   @IsNotEmpty()
+  @IsNumber()
+  @Min(0)
+  @Max(10)
   nota_segundo_semestre: number;
 
   @ApiProperty()
