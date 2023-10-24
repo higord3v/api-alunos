@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Aluno } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { CriarAlunoDTO } from './dto/CriarAlunoDTO';
+import { CriarAlunoDTO } from './dto/CriarAlunoDTO.dto';
 
 @Injectable()
 export class AlunoService {

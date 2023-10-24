@@ -9,9 +9,10 @@ import {
   Put,
 } from '@nestjs/common';
 import { Aluno } from '@prisma/client';
-import { CriarAlunoDTO } from './dto/CriarAlunoDTO';
+import { CriarAlunoDTO } from './dto/CriarAlunoDTO.dto';
 import { AlunoService } from './aluno.service';
-import { AtualizarAlunoDTO } from './dto/AtualizarAlunoDTO';
+import { AtualizarAlunoDTO } from './dto/AtualizarAlunoDTO.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('aluno')
 export class AlunoController {
@@ -23,11 +24,13 @@ export class AlunoController {
   }
 
   @Post()
+  @ApiBody({ type: [CriarAlunoDTO] })
   async postAluno(@Body() criarAlunoDTO: CriarAlunoDTO): Promise<Aluno> {
     return this.alunoService.criarAluno(criarAlunoDTO);
   }
 
   @Put(':id')
+  @ApiBody({ type: [AtualizarAlunoDTO] })
   async putAluno(
     @Param('id', ParseIntPipe) id: number,
     @Body() atualizarAluno: AtualizarAlunoDTO,
