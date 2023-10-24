@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Aluno {
+model aluno {
   id      Int       @id @default(autoincrement())
   nome    String
   idade     Int
