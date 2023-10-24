@@ -11,6 +11,10 @@ async function bootstrap() {
     .setTitle('Alunos API')
     .setDescription('API para gerenciar cadastro de Alunos')
     .setVersion('1.0')
+    .setExternalDoc(
+      'acesse o repositório',
+      'https://github.com/higord3v/api-alunos',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

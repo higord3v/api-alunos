@@ -1,73 +1,54 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API de Alunos
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Bem-vindo à API de Alunos! Esta API foi desenvolvida com [Nest.js](https://nestjs.com/), utiliza o ORM [Prisma](https://www.prisma.io/) e está implantada na plataforma [Cyclic](https://cyclic.io/).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Rotas
 
-## Description
+### Listar Todos os Alunos
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Rota**: `/api/aluno`
+- **Método HTTP**: GET
+- **Descrição**: Retorna uma lista de todos os alunos cadastrados.
 
-## Installation
+### Buscar Aluno por ID
 
-```bash
-$ npm install
-```
+- **Rota**: `/api/aluno/:id`
+- **Método HTTP**: GET
+- **Descrição**: Retorna os detalhes de um aluno específico com base no ID fornecido.
 
-## Running the app
+### Cadastrar um Novo Aluno
 
-```bash
-# development
-$ npm run start
+- **Rota**: `/api/aluno`
+- **Método HTTP**: POST
+- **Descrição**: Permite cadastrar um novo aluno. Os campos necessários no corpo da requisição são:
+  - `nome` (string)
+  - `idade` (number)
+  - `nota_primeiro_semestre` (number)
+  - `nota_segundo_semestre` (number)
+  - `professor` (string)
+  - `sala` (string)
 
-# watch mode
-$ npm run start:dev
+### Excluir um Aluno
 
-# production mode
-$ npm run start:prod
-```
+- **Rota**: `/api/aluno/:id`
+- **Método HTTP**: DELETE
+- **Descrição**: Exclui um aluno com base no ID fornecido.
 
-## Test
+### Editar Aluno
 
-```bash
-# unit tests
-$ npm run test
+- **Rota**: `/api/aluno/:id`
+- **Método HTTP**: PUT
+- **Descrição**: Atualiza os dados de um aluno com base no ID fornecido. Os campos que podem ser atualizados são os mesmos que no cadastro.
 
-# e2e tests
-$ npm run test:e2e
+## Documentação com Swagger
 
-# test coverage
-$ npm run test:cov
-```
+A documentação completa da API pode ser acessada através do Swagger. Basta visitar a seguinte rota:
 
-## Support
+- **URL Swagger**: `/docs`
+- **Descrição**: A documentação interativa da API permite explorar os endpoints, testar as requisições e obter informações detalhadas sobre como usar a API.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Implantação
 
-## Stay in touch
+Esta API foi implantada na plataforma [Cyclic](https://cyclic.io/) para garantir alto desempenho e escalabilidade.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+---
