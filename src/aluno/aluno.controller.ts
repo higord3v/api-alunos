@@ -1,45 +1,47 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { aluno } from '@prisma/client';
-import { PrismaService } from 'src/prisma.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { Aluno } from '@prisma/client';
+import { CriarAlunoDTO } from './dto/CriarAlunoDTO';
+import { AlunoService } from './aluno.service';
+import { AtualizarAlunoDTO } from './dto/AtualizarAlunoDTO';
 
 @Controller('aluno')
 export class AlunoController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly alunoService: AlunoService) {}
 
   @Get()
-  async index(): Promise<aluno[]> {
-    return this.prismaService.aluno.findMany();
+  async getAllAlunos(): Promise<Aluno[]> {
+    return this.alunoService.recuperarTodos();
   }
 
   @Post()
-  async createStudent(
-    @Body()
-    postData: {
-      nome: string;
-      idade: number;
-      nota_primeiro_semestre: number;
-      nota_segundo_semestre: number;
-      professor: string;
-      sala: number;
-    },
-  ): Promise<aluno> {
-    const {
-      nome,
-      idade,
-      nota_primeiro_semestre,
-      nota_segundo_semestre,
-      professor,
-      sala,
-    } = postData;
-    return this.prismaService.aluno.create({
-      data: {
-        nome,
-        idade,
-        nota_primeiro_semestre,
-        nota_segundo_semestre,
-        professor,
-        sala,
-      },
-    });
+  async postAluno(@Body() criarAlunoDTO: CriarAlunoDTO): Promise<Aluno> {
+    return this.alunoService.criarAluno(criarAlunoDTO);
+  }
+
+  @Put(':id')
+  async putAluno(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() atualizarAluno: AtualizarAlunoDTO,
+  ): Promise<Aluno> {
+    return this.alunoService.atualizarAluno(id, atualizarAluno);
+  }
+
+  @Get(':id')
+  async getOneAluno(@Param('id', ParseIntPipe) id: number): Promise<Aluno> {
+    return this.alunoService.recuperarUmAluno(id);
+  }
+
+  @Delete(':id')
+  async deleteAluno(@Param('id', ParseIntPipe) id: number): Promise<Aluno> {
+    return this.alunoService.deletar(id);
   }
 }
